@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DIRTY X RUSH</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="app-shell">
+    <!-- Top controls stay visible during gameplay for quick pause/restart. -->
+    <header class="top-bar">
+        <h1>DIRTY X RUSH</h1>
+        <div class="top-actions">
+            <button id="pauseBtn" type="button">Pause</button>
+            <button id="restartBtn" type="button">Restart</button>
+        </div>
+    </header>
+
+    <main class="content">
+        <!-- Primary play surface: HUD + Canvas + state overlays. -->
+        <section class="game-stage">
+            <div class="hud" id="hud">
+                <div class="hud-item">Level: <span id="hudLevel">1</span></div>
+                <div class="hud-item">Difficulty: <span id="hudDifficulty">Easy</span></div>
+                <div class="hud-item">Timer: <span id="hudTimer">00:00</span></div>
+                <div class="hud-item">Score: <span id="hudScore">0</span></div>
+                <div class="hud-item">Best: <span id="hudBest">0</span></div>
+                <div class="hud-item">Speed: <span id="hudSpeed">0</span></div>
+            </div>
+
+            <canvas id="gameCanvas" width="1280" height="720" aria-label="DIRTY X RUSH game canvas"></canvas>
+
+            <!-- Overlay is reused for start, pause, game-over, level-complete, and final screens. -->
+            <div id="overlay" class="overlay">
+                <div class="overlay-panel">
+                    <h2 id="overlayTitle">DIRTY X RUSH</h2>
+                    <p id="overlaySubtitle"></p>
+                    <div id="overlayMeta"></div>
+                    <div id="startControls" class="start-controls hidden">
+                        <label for="levelSelect">Start from unlocked level</label>
+                        <select id="levelSelect"></select>
+                    </div>
+                    <div id="overlayButtons" class="overlay-buttons"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Side panel keeps controls/rules always accessible while playing. -->
+        <aside class="instructions">
+            <h2>Controls</h2>
+            <ul>
+                <li>Right Arrow: Accelerate</li>
+                <li>Left Arrow: Brake / Reverse</li>
+                <li>Up Arrow or Space: Jump / Lift front</li>
+                <li>Down Arrow: Balance down / Slow</li>
+                <li>P: Pause or Resume</li>
+                <li>R: Restart level</li>
+            </ul>
+
+            <h2>Race Rules</h2>
+            <ul>
+                <li>Complete 10 levels with progressive difficulty.</li>
+                <li>Avoid pits, spikes, lava, and moving hazards.</li>
+                <li>Collect stars for score boosts.</li>
+                <li>Fast finishes earn time bonus points.</li>
+            </ul>
+        </aside>
+    </main>
+</div>
+
+<script src="js/game.js"></script>
+</body>
+</html>

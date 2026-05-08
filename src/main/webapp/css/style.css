@@ -1,0 +1,234 @@
+:root {
+    /* Centralized color tokens for quick theme tweaks. */
+    --bg-0: #0f1115;
+    --bg-1: #161a20;
+    --bg-2: #1f252d;
+    --text-0: #e7edf5;
+    --text-1: #aeb8c5;
+    --accent-0: #f58b2a;
+    --accent-1: #2bc4a3;
+    --danger: #df4e4e;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Segoe UI", Tahoma, sans-serif;
+    background: radial-gradient(circle at top, #1f2835 0%, var(--bg-0) 55%);
+    color: var(--text-0);
+}
+
+.app-shell {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px;
+    background: rgba(12, 15, 19, 0.88);
+    border-bottom: 1px solid #2b3340;
+}
+
+.top-bar h1 {
+    margin: 0;
+    font-size: 1.35rem;
+    letter-spacing: 0;
+}
+
+.top-actions {
+    display: flex;
+    gap: 10px;
+}
+
+button {
+    border: none;
+    border-radius: 6px;
+    padding: 9px 14px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    color: #111820;
+    background: linear-gradient(180deg, #ffad55 0%, var(--accent-0) 100%);
+    transition: transform 0.1s ease, filter 0.2s ease;
+}
+
+button:hover {
+    filter: brightness(1.05);
+}
+
+button:active {
+    transform: translateY(1px);
+}
+
+.ghost-btn {
+    background: linear-gradient(180deg, #56dbc0 0%, var(--accent-1) 100%);
+}
+
+.danger-btn {
+    background: linear-gradient(180deg, #f57f7f 0%, var(--danger) 100%);
+}
+
+.content {
+    /* Desktop layout: game canvas + right-side help panel. */
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 16px;
+    padding: 14px 16px 16px;
+    flex: 1;
+}
+
+.game-stage {
+    position: relative;
+    min-width: 0;
+    border: 1px solid #27303a;
+    border-radius: 8px;
+    background: #0e1217;
+    overflow: hidden;
+}
+
+canvas {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    height: auto;
+    background: #131922;
+}
+
+.hud {
+    /* HUD is kept compact to avoid covering driving line. */
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 2;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    max-width: calc(100% - 20px);
+}
+
+.hud-item {
+    padding: 6px 10px;
+    border-radius: 6px;
+    background: rgba(5, 8, 13, 0.7);
+    border: 1px solid rgba(98, 113, 129, 0.5);
+    font-size: 0.84rem;
+    color: var(--text-0);
+    white-space: nowrap;
+}
+
+.overlay {
+    /* Overlay hosts all modal game states and blocks input below. */
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(5, 7, 10, 0.66);
+    z-index: 3;
+}
+
+.overlay.menu-overlay {
+    background:
+        linear-gradient(180deg, rgba(5, 8, 12, 0.22) 0%, rgba(5, 8, 12, 0.7) 100%),
+        url("../assets/images/splash-race.png") center/cover no-repeat;
+}
+
+.overlay.hidden {
+    display: none;
+}
+
+.overlay-panel {
+    width: min(92%, 560px);
+    padding: 20px 20px 18px;
+    border-radius: 8px;
+    border: 1px solid #2a3340;
+    background: rgba(13, 17, 24, 0.94);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35);
+}
+
+.overlay-panel h2 {
+    margin: 0 0 10px;
+    font-size: 1.42rem;
+}
+
+.overlay-panel p {
+    margin: 0 0 8px;
+    color: var(--text-1);
+}
+
+#overlayMeta {
+    margin: 8px 0 12px;
+    color: #d9e2ee;
+    font-size: 0.95rem;
+    min-height: 20px;
+}
+
+.overlay-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.start-controls {
+    margin: 10px 0 14px;
+    display: grid;
+    gap: 6px;
+    max-width: 280px;
+}
+
+.start-controls.hidden {
+    display: none;
+}
+
+label {
+    color: var(--text-1);
+    font-size: 0.9rem;
+}
+
+select {
+    border-radius: 6px;
+    border: 1px solid #3b4758;
+    padding: 8px 9px;
+    background: var(--bg-2);
+    color: var(--text-0);
+    font-size: 0.93rem;
+}
+
+.instructions {
+    border: 1px solid #2a3340;
+    border-radius: 8px;
+    background: rgba(16, 20, 27, 0.78);
+    padding: 14px 14px 6px;
+    overflow: auto;
+}
+
+.instructions h2 {
+    margin: 4px 0 8px;
+    font-size: 1.02rem;
+}
+
+.instructions ul {
+    margin: 0 0 14px;
+    padding-left: 18px;
+    color: var(--text-1);
+    line-height: 1.4;
+    font-size: 0.92rem;
+}
+
+@media (max-width: 1100px) {
+    /* Mobile/tablet layout stacks instructions under the game stage. */
+    .content {
+        grid-template-columns: 1fr;
+    }
+
+    .instructions {
+        max-height: 235px;
+    }
+}
